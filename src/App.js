@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [value, setValue] = useState('')
+  const [result, setResult] = useState("")
+
+  function handleSubmit(e){
+    e.preventDefault()
+    setResult(`تم إرسال النموذج بالقيمة ${value}`)
+  }
+
+  function handleChange(event){
+    setValue(event.target.value)
+    setResult('')
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div style={{textAlign: "center", margin: "auto"}}>
+      <h1>مثال على إستخدام onSubmit في React</h1>
+      <form onSubmit={handleSubmit}>
+        <input type='text' value={value} onChange={handleChange} required />
+        <br /> <br />
+        <button type='submit'>إرسال</button>
+      </form>
+      <br />
+      <div>
+        <h4>{result}</h4>
+      </div>
     </div>
+    </>
   );
 }
 
